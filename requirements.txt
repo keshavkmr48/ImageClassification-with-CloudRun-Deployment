@@ -1,0 +1,48 @@
+# FastAPI and related services
+fastapi
+uvicorn
+pydantic
+aiofiles # For handling file uploads
+
+# Image handling and processing
+Pillow # For image manipulation and processing
+
+# Cloud services (GCP integration)
+google-cloud-storage  # For uploading images to GCP Bucket
+google-auth # For GCP authentication
+
+# RabbitMQ for communication between services
+pika  # RabbitMQ client
+
+# PostgreSQL database and ORM
+sqlalchemy  # ORM for database interactions
+asyncpg  # PostgreSQL async driver
+alembic # For database migrations
+
+# Machine Learning libraries (PyTorch)
+numpy
+scikit-learn
+torch # PyTorch for model development
+torchvision  # For working with images in PyTorch
+joblib  # For model serialization
+
+# ML Lifecycle Management (Kubeflow, Airflow, etc.)
+kfp # Kubeflow Pipelines SDK
+apache-airflow # For orchestrating ML workflows
+apache-airflow-providers-google  # Airflow integration with Google Cloud
+kubernetes  # For Kubernetes deployments
+
+# Monitoring and logging
+elasticsearch  # Elasticsearch for logging
+python-logstash  # Logstash for data ingestion to Elasticsearch
+kibana # Kibana for visualization
+
+# CI/CD and testing
+pytest  # Testing framework
+pytest-asyncio  # For async testing
+tox # For running tests across environments
+flake8 # For linting
+
+# Additional utilities
+requests  # For making HTTP requests
+python-dotenv  # For managing environment variables
