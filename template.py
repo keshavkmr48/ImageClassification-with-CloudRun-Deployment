@@ -16,6 +16,7 @@ list_of_files = [
    "src/data/gcp_utils.py",
    "src/models/__init__.py", 
    "src/models/classifier.py",
+   "src/models/prediction_result.py",
 
    # FastAPI app files
    f"{app}/__init__.py", 
@@ -27,7 +28,9 @@ list_of_files = [
    f"{app}/migrations/__init__.py", 
    f"{app}/routes/__init__.py", 
    f"{app}/routes/files.py", 
-   f"{app}/routes/predict.py", 
+
+
+
 
    # Scripts for CloudRun and Docker
    "crun_deploy.sh",

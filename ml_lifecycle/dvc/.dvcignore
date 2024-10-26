@@ -1,0 +1,37 @@
+# Ignore temporary files
+*.tmp
+*.temp
+
+# Ignore compiled Python files
+*.pyc
+__pycache__/
+
+# Ignore Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Ignore data files that should not be tracked
+data/
+raw_data/
+processed_data/*.csv  # Ignore processed CSV files, assuming they're generated and should not be tracked
+model/*.pkl  # Ignore model files if you do not want to track versions of them in DVC
+
+# Ignore environment files
+.env
+
+# Ignore logs and output files
+logs/
+output/
+
+# Ignore any local configuration files
+*.local
+*.env
+
+# Ignore Docker and Kubernetes files if not necessary for DVC
+Dockerfile
+k8s/
+
+# Ignore DVC cache directories
+.dvc/cache/
+
+# Ignore DVC related artifacts
+.dvc/tmp/

@@ -1,0 +1,25 @@
+stages:
+  data_pipeline:
+    cmd: python ml_lifecycle/data_pipeline.py
+    deps:
+      - raw_data/raw_data.csv
+    outs:
+      - processed_data/processed_data.csv
+
+  train_model:
+    cmd: python ml_lifecycle/train_model.py
+    deps:
+      - processed_data/processed_data.csv
+    outs:
+      - model/model.pkl
+
+  evaluate_model:
+    cmd: python ml_lifecycle/evaluate_model.py
+    deps:
+      - model/model.pkl
+      - processed_data/processed_data.csv
+    outs:
+      - evaluation_metrics.json
+
+  retrain_model:
+    cmd: python ml_lifecycle/retrain_model.py

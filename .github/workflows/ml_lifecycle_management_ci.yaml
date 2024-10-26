@@ -1,0 +1,65 @@
+name: ML Lifecycle Management CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  # Job to run data pipeline and model training
+  ml_pipeline:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.9'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r ${ml_lifecycle}/requirements_ml.txt
+
+    - name: Run data pipeline
+      run: |
+        python ${ml_lifecycle}/data_pipeline.py
+
+    - name: Run model training
+      run: |
+        python ${ml_lifecycle}/train_model.py
+
+    - name: Evaluate model
+      run: |
+        python ${ml_lifecycle}/evaluate_model.py
+
+    - name: Upload model
+      run: |
+        python ${ml_lifecycle}/model_registry.py upload
+
+  # Job to build Docker image for ML lifecycle services
+  build_ml_image:
+    runs-on: ubuntu-latest
+    needs: ml_pipeline  # This job depends on the 'ml_pipeline' job
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v1
+
+    - name: Log in to DockerHub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+
+    - name: Build and push ML Docker image
+      run: |
+        docker build -t ${{ secrets.DOCKER_USERNAME }}/ml_lifecycle:latest -f ${ml_lifecycle}/Dockerfile .
+        docker push ${{ secrets.DOCKER_USERNAME }}/ml_lifecycle:latest
